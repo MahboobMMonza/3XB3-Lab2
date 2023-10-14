@@ -1,5 +1,21 @@
-from graph import Graph
 import enhanced_traversals
+from graph import *
+
+
+def main():
+    graph = build_test_graph()
+    print('Testing DFS2 from 0 to 4')
+    test_DFS2(graph, 0, 4)
+    print('Testing BFS2 from 0 to 5')
+    test_BFS2(graph, 0, 5, 3)
+    print('Testing DFS3 from 5')
+    test_DFS3(graph, 5, 5)
+    print('Testing BFS3 from 2')
+    test_BFS3(graph, 2, 5, 5, 2)
+    print('Testing if graph is connected')
+    test_is_connected(graph, True)
+    print('Testing if graph has cycle')
+    test_has_cycle(graph, True)
 
 
 def build_test_graph() -> Graph:
@@ -48,13 +64,13 @@ def test_BFS3(g: Graph, node1: int, node2: int, expected_size: int, expected_dis
     assert len(path) == expected_dist + 1
 
 
+def test_is_connected(g: Graph, expected: bool):
+    assert enhanced_traversals.is_connected(g) == expected
+
+
+def test_has_cycle(g: Graph, expected: bool):
+    assert enhanced_traversals.has_cycle(g) == expected
+
+
 if __name__ == '__main__':
-    graph = build_test_graph()
-    print('Testing DFS2 from 0 to 4')
-    test_DFS2(graph, 0, 4)
-    print('Testing BFS2 from 0 to 5')
-    test_BFS2(graph, 0, 5, 3)
-    print('Testing DFS3 from 5')
-    test_DFS3(graph, 5, 5)
-    print('Testing BFS3 from 2')
-    test_BFS3(graph, 2, 5, 5, 2)
+    main()
