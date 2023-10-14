@@ -104,7 +104,7 @@ def is_connected(graph: Graph) -> bool:
     # possible, then traversing A <=> B is possible by at least traversing
     # A <=> C <=> B. Hence, if one node can reach all other nodes, then each node
     # can reach every other node.
-    return len(BFS3(graph, 0)) == graph.number_of_nodes() - 1
+    return len(DFS3(graph, 0)) == graph.number_of_nodes() - 1
 
 
 def has_cycle(graph: Graph) -> bool:
