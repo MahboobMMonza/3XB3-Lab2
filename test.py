@@ -2,7 +2,7 @@ import enhanced_traversals
 from graph import *
 
 
-def main():
+def main() -> None:
     graph = build_test_graph()
     print('Testing DFS2 from 0 to 4')
     test_DFS2(graph, 0, 4)
@@ -30,7 +30,7 @@ def build_test_graph() -> Graph:
     return g
 
 
-def test_DFS2(g: Graph, node1: int, node2: int):
+def test_DFS2(g: Graph, node1: int, node2: int) -> None:
     path = enhanced_traversals.DFS2(g, node1, node2)
     print(path)
     assert path[0] == node1
@@ -39,7 +39,7 @@ def test_DFS2(g: Graph, node1: int, node2: int):
         assert g.are_connected(n1, n2)
 
 
-def test_BFS2(g: Graph, node1: int, node2: int, expected: int):
+def test_BFS2(g: Graph, node1: int, node2: int, expected: int) -> None:
     path = enhanced_traversals.BFS2(g, node1, node2)
     print(path)
     assert path[0] == node1
@@ -49,13 +49,13 @@ def test_BFS2(g: Graph, node1: int, node2: int, expected: int):
     assert len(path) == expected + 1
 
 
-def test_DFS3(g: Graph, node1: int, expected: int):
+def test_DFS3(g: Graph, node1: int, expected: int) -> None:
     predecessors = enhanced_traversals.DFS3(g, node1)
     print(predecessors)
     assert len(predecessors) == expected
 
 
-def test_BFS3(g: Graph, node1: int, node2: int, expected_size: int, expected_dist: int):
+def test_BFS3(g: Graph, node1: int, node2: int, expected_size: int, expected_dist: int) -> None:
     predecessors = enhanced_traversals.BFS3(g, node1)
     print(predecessors)
     assert len(predecessors) == expected_size
@@ -64,11 +64,11 @@ def test_BFS3(g: Graph, node1: int, node2: int, expected_size: int, expected_dis
     assert len(path) == expected_dist + 1
 
 
-def test_is_connected(g: Graph, expected: bool):
+def test_is_connected(g: Graph, expected: bool) -> None:
     assert enhanced_traversals.is_connected(g) == expected
 
 
-def test_has_cycle(g: Graph, expected: bool):
+def test_has_cycle(g: Graph, expected: bool) -> None:
     assert enhanced_traversals.has_cycle(g) == expected
 
 
