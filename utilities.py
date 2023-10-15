@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+from graph import create_random_graph
+
 
 def create_plot(x_vals: list,
                 y_vals: list[list],
@@ -21,3 +23,40 @@ def create_plot(x_vals: list,
     plt.title(description, fontsize=10)
     plt.legend(fontsize=10)
     plt.show()
+
+
+def incrementing_edge_graph_evals(num_nodes: int,
+                                  min_edges: int,
+                                  max_edges: int,
+                                  benchmarks: int,
+                                  repetitions: int,
+                                  include_start: bool,
+                                  evaluation: callable) -> tuple[list[float], list[float]]:
+    step = (max_edges - min_edges) // benchmarks
+    start = min_edges if include_start else min_edges + step
+    probability, proportion = [], []
+    for num_edges in range(start, max_edges + 1, step):
+        probability.append(
+            sum(evaluation(create_random_graph(num_nodes, num_edges)) for _ in range(repetitions)) / repetitions
+        )
+        proportion.append(num_edges / (max_edges - min_edges))
+
+    return proportion, probability
+
+
+def incrementing_node_graph_evals(node_sizes: list[int],
+                                  min_eval: callable,
+                                  max_eval: callable,
+                                  benchmarks: int,
+                                  repetitions: int,
+                                  include_start: bool,
+                                  graph_eval: callable) -> tuple[list[float], list[float]]:
+    for num_nodes in node_sizes:
+        min_edges, max_edges = min_eval(num_nodes), max_eval(num_nodes)
+        yield incrementing_edge_graph_evals(num_nodes,
+                                            min_edges,
+                                            max_edges,
+                                            benchmarks,
+                                            repetitions,
+                                            include_start,
+                                            graph_eval)
