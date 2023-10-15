@@ -43,7 +43,7 @@ def create_random_graph(num_nodes: int, num_edges: int) -> Graph:
         # created, and act accordingly. The `are_connected` function could be used, but since adjacency is done
         # using a Python list, that is an O(n) operation. That could be fixed by using a set for adjacency
         # instead.
-        u, v = random.randint(0, num_nodes), random.randint(0, num_nodes)
+        u, v = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
         if u == v:
             continue
         elif u > v:
