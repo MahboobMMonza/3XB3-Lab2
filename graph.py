@@ -35,14 +35,13 @@ def create_random_graph(num_nodes: int, num_edges: int) -> Graph:
     g = Graph(num_nodes)
     # Use a set to track all the edges added so far
     existing_edges = set()
-    count = 0
-    while count < num_edges:
+    while len(existing_edges) < num_edges:
         # In an undirected graph, an edge (u, v) can always be represented such that u < v. So we only need to
         # track that the randomly generated numbers are not equal (no self-loops), and then we can swap values
         # if the generated v is less than the generated u. Then we can check if this edge has already been
         # created, and act accordingly. The `are_connected` function could be used, but since adjacency is done
         # using a Python list, that is an O(n) operation. That could be fixed by using a set for adjacency
-        # instead.
+        # instead (granted the adding operation itself is O(n)).
         u, v = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
         if u == v:
             continue
@@ -52,6 +51,5 @@ def create_random_graph(num_nodes: int, num_edges: int) -> Graph:
             continue
         g.add_edge(u, v)
         existing_edges.add((u, v))
-        count += 1
 
     return g
