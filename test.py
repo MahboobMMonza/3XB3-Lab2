@@ -16,6 +16,8 @@ def main() -> None:
     test_is_connected(graph, True)
     print('Testing if graph has cycle')
     test_has_cycle(graph, True)
+    print('Testing random graph creation')
+    test_create_random_graph(10, 200, 5)
 
 
 def build_test_graph() -> Graph:
@@ -70,6 +72,23 @@ def test_is_connected(g: Graph, expected: bool) -> None:
 
 def test_has_cycle(g: Graph, expected: bool) -> None:
     assert enhanced_traversals.has_cycle(g) == expected
+
+
+def test_create_random_graph(min_nodes: int, max_nodes: int, min_edges: int):
+    for _ in range(100):
+        num_nodes = random.randint(min_nodes, max_nodes)
+        max_edges = (num_nodes ** 2 - num_nodes) // 2
+        num_edges = random.randint(min_edges, num_nodes ** 2)
+        total_edges = min(max_edges, num_edges)
+        edge_count = 0
+        g = create_random_graph(num_nodes, num_edges)
+        assert g.number_of_nodes() == num_nodes
+        for n in range(g.number_of_nodes() - 1):
+            edge_count += sum(1 for node in g.adjacent_nodes(n) if node > n)
+
+        assert edge_count == total_edges
+
+    print('Graph created successfully')
 
 
 if __name__ == '__main__':

@@ -10,14 +10,16 @@ def create_plot(x_vals: list,
                 description: str,
                 x_label: str,
                 y_label: str,
-                scale: float = 1) -> None:
+                scale: float = 1,
+                show_ticks: bool = True) -> None:
     height, width = plt.figure().get_figheight(), plt.figure().get_figwidth()
     plt.figure(figsize=(scale * width, scale * height))
     for yv, legend in zip(y_vals, legend_labels):
         plt.plot(x_vals, yv, linewidth=2, label=legend, marker='o')
 
     plt.xlabel(x_label)
-    plt.xticks(x_vals)
+    if show_ticks:
+        plt.xticks(x_vals)
     plt.ylabel(y_label)
     plt.suptitle(title, fontsize=14)
     plt.title(description, fontsize=10)
@@ -28,6 +30,7 @@ def create_plot(x_vals: list,
 def incrementing_edge_graph_evals(num_nodes: int,
                                   min_edges: int,
                                   max_edges: int,
+                                  true_max_edges: int,
                                   benchmarks: int,
                                   repetitions: int,
                                   include_start: bool,
@@ -39,7 +42,7 @@ def incrementing_edge_graph_evals(num_nodes: int,
         probability.append(
             sum(evaluation(create_random_graph(num_nodes, num_edges)) for _ in range(repetitions)) / repetitions
         )
-        proportion.append(num_edges / (max_edges - min_edges))
+        proportion.append((num_edges - min_edges) / (true_max_edges - min_edges))
 
     return proportion, probability
 
@@ -50,12 +53,15 @@ def incrementing_node_graph_evals(node_sizes: list[int],
                                   benchmarks: int,
                                   repetitions: int,
                                   include_start: bool,
-                                  graph_eval: callable) -> tuple[list[float], list[float]]:
+                                  graph_eval: callable,
+                                  true_max_eval: callable = None) -> tuple[list[float], list[float]]:
     for num_nodes in node_sizes:
         min_edges, max_edges = min_eval(num_nodes), max_eval(num_nodes)
+        true_max_edges = true_max_eval(num_nodes) if true_max_eval else max_edges
         yield incrementing_edge_graph_evals(num_nodes,
                                             min_edges,
                                             max_edges,
+                                            true_max_edges,
                                             benchmarks,
                                             repetitions,
                                             include_start,
