@@ -63,7 +63,7 @@ def DFS2(g: Graph, node1: int, node2: int) -> list[int]:
         # Reversing the list has no effect on actual DFS except
         # that the first node is visited first and the last node
         # is visited last
-        for node in reversed(g.adjacent_nodes(cur_node)):
+        for node in reversed(list(g.adjacent_nodes(cur_node))):
             if visited[node]:
                 continue
             predecessor[node] = cur_node
@@ -88,7 +88,7 @@ def DFS3(g: Graph, node1: int) -> dict[int, int]:
         # Reversing the list has no effect on actual DFS except
         # that the first node is visited first and the last node
         # is visited last
-        for node in reversed(g.adjacent_nodes(cur_node)):
+        for node in reversed(list(g.adjacent_nodes(cur_node))):
             if visited[node]:
                 continue
             predecessor[node] = cur_node
@@ -129,7 +129,7 @@ def has_cycle(graph: Graph) -> bool:
         # Modified version of DFS that "marks" the node at discovery
         while s:
             cur_node, pred = s.pop()
-            for node in reversed(graph.adjacent_nodes(cur_node)):
+            for node in reversed(list(graph.adjacent_nodes(cur_node))):
                 # If the node has been visited before and is not the caller, return true
                 # otherwise skip if it's the caller
                 if visited[node] and node != pred:
