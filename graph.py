@@ -7,7 +7,7 @@ class Graph:
     def __init__(self, n):
         self.adj = {}
         for i in range(n):
-            self.adj[i] = []
+            self.adj[i] = set()
 
     def are_connected(self, node1, node2):
         return node2 in self.adj[node1]
@@ -16,12 +16,12 @@ class Graph:
         return self.adj[node]
 
     def add_node(self):
-        self.adj[len(self.adj)] = []
+        self.adj[len(self.adj)] = set()
 
     def add_edge(self, node1, node2):
         if node1 not in self.adj[node2]:
-            self.adj[node1].append(node2)
-            self.adj[node2].append(node1)
+            self.adj[node1].add(node2)
+            self.adj[node2].add(node1)
 
     def number_of_nodes(self):
         return len(self.adj)
