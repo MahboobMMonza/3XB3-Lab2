@@ -1,23 +1,26 @@
 import enhanced_traversals
 from graph import *
+from utilities import find_values
 
 
 def main() -> None:
-    graph = build_test_graph()
-    print('Testing DFS2 from 0 to 4')
-    test_DFS2(graph, 0, 4)
-    print('Testing BFS2 from 0 to 5')
-    test_BFS2(graph, 0, 5, 3)
-    print('Testing DFS3 from 5')
-    test_DFS3(graph, 5, 5)
-    print('Testing BFS3 from 2')
-    test_BFS3(graph, 2, 5, 5, 2)
-    print('Testing if graph is connected')
-    test_is_connected(graph, True)
-    print('Testing if graph has cycle')
-    test_has_cycle(graph, True)
-    print('Testing random graph creation')
-    test_create_random_graph(10, 200, 5)
+    result = find_values()
+    print(result)
+    # graph = build_test_graph()
+    # print('Testing DFS2 from 0 to 4')
+    # test_DFS2(graph, 0, 4)
+    # print('Testing BFS2 from 0 to 5')
+    # test_BFS2(graph, 0, 5, 3)
+    # print('Testing DFS3 from 5')
+    # test_DFS3(graph, 5, 5)
+    # print('Testing BFS3 from 2')
+    # test_BFS3(graph, 2, 5, 5, 2)
+    # print('Testing if graph is connected')
+    # test_is_connected(graph, True)
+    # print('Testing if graph has cycle')
+    # test_has_cycle(graph, True)
+    # print('Testing random graph creation')
+    # test_create_random_graph(10, 200, 5)
 
 
 def build_test_graph() -> Graph:
