@@ -2,7 +2,7 @@ from enhanced_traversals import has_cycle
 from utilities import *
 
 
-def run_experiment1a():
+def run_experiment1a() -> None :
     # Next step is to create run across different numbers of nodes
     num_nodes = [101, 301, 501]
     benchmarks, reps, include_start = 20, 30, False
@@ -24,7 +24,7 @@ def run_experiment1a():
     create_plot(proportion, probability, legend_labels, title, desc, x_label, y_label, 1.60)
 
 
-def run_experiment1b():
+def run_experiment1b() -> None:
     # Next step is to create run across different numbers of nodes
     num_nodes = [201, 401, 1001]
     benchmarks, reps, include_start = 20, 30, False
