@@ -2,9 +2,9 @@ from enhanced_traversals import is_connected
 from utilities import *
 
 
-def run_experiment2() -> None:
-    num_nodes = [201, 401]
-    benchmarks, reps, include_start = 10, 40, True
+def run_experiment2a() -> None:
+    num_nodes = [26, 77]
+    benchmarks, reps, include_start = 20, 40, True
     legend_labels = [f'{nodes} Node Graph' for nodes in num_nodes]
     title = 'Proportion of Edges vs Connectivity Probability'
     desc = (f'{benchmarks + include_start} benchmarks from (n - 1) edges for n nodes with {reps} repetitions'
@@ -13,7 +13,8 @@ def run_experiment2() -> None:
     y_label = 'Probability of Graph Connectivity'
     results = [(prp, prob) for prp, prob in incrementing_node_graph_evals(num_nodes,
                                                                           lambda n: n - 1,
-                                                                          lambda n: ((n ** 2 - n) // 2) // 5,
+                                                                          lambda n: ((n ** 2 - n) // 2 - (
+                                                                                  n - 1)) // 5 * 2 + (n - 1),
                                                                           benchmarks,
                                                                           reps,
                                                                           include_start,
@@ -25,4 +26,4 @@ def run_experiment2() -> None:
 
 
 if __name__ == '__main__':
-    run_experiment2()
+    run_experiment2a()
