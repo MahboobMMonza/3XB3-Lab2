@@ -66,3 +66,13 @@ def incrementing_node_graph_evals(node_sizes: list[int],
                                             repetitions,
                                             include_start,
                                             graph_eval)
+
+
+def find_values() -> list[int]:
+    results = []
+    for n in range(1, 3000):  # Iterate through a range of n values
+        eval_eqn = ((n ** 2 - n) // 2 - (n - 1)) * 0.01
+        if eval_eqn.is_integer():
+            results.append(n)
+
+    return results
