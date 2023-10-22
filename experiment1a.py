@@ -2,9 +2,9 @@ from enhanced_traversals import has_cycle
 from utilities import *
 
 
-def run_experiment1() -> None:
+def run_experiment1a() -> None:
     # Next step is to create run across different numbers of nodes
-    num_nodes = [101, 501, 1001, 2001, 4001]
+    num_nodes = [101, 301, 501]
     benchmarks, reps, include_start = 20, 30, False
     legend_labels = [f'{nodes} Node Graph' for nodes in num_nodes]
     title = 'Proportion of Edges vs Cycle Probability'
@@ -25,4 +25,4 @@ def run_experiment1() -> None:
 
 
 if __name__ == '__main__':
-    run_experiment1()
+    run_experiment1a()
