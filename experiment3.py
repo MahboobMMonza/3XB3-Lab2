@@ -1,5 +1,5 @@
-from utilities import *
 from approximations import *
+from utilities import *
 
 
 def run_experiment3a():
@@ -40,15 +40,13 @@ def run_experiment3a():
         approx2_vals.append(avg_min_vc_size / avg_vc_approx2 * 100)
         approx3_vals.append(avg_min_vc_size / avg_vc_approx3 * 100)
 
-    create_plot(
-        x_vals,
-        [approx1_vals, approx2_vals, approx3_vals],
-        legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
-        title="Proportion of True MVC Sizes to Approximation Size",
-        description="Performance relative to minimum vertex cover size",
-        x_label="Number of Edges",
-        y_label="Performance (%)"
-    )
+    create_plot(x_vals,
+                [approx1_vals, approx2_vals, approx3_vals],
+                legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
+                title="Proportion of True MVC Sizes to Approximation Size",
+                description="Performance relative to minimum vertex cover size",
+                x_label="Number of Edges",
+                y_label="Performance (%)")
 
 
 def run_experiment3b():
@@ -90,15 +88,13 @@ def run_experiment3b():
         approx2_matches.append(approx2_percent)
         approx3_matches.append(approx3_percent)
 
-    create_plot(
-        edge_ranges,
-        [approx1_matches, approx2_matches, approx3_matches],
-        legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
-        title="Accuracy of True MVC Sizes to Approximation Size",
-        description="Percentage of times the approximation matches MVC result",
-        x_label="Number of Edges",
-        y_label="Percentage of Matches"
-    )
+    create_plot(list(edge_ranges),
+                [approx1_matches, approx2_matches, approx3_matches],
+                legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
+                title="Accuracy of True MVC Sizes to Approximation Size",
+                description="Percentage of times the approximation matches MVC result",
+                x_label="Number of Edges",
+                y_label="Percentage of Matches")
 
 
 def main():
