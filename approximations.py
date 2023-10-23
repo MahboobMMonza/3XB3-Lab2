@@ -14,7 +14,7 @@ def approx1(g: Graph) -> set[int]:
 
     while not is_vertex_cover(g, cover):
         max_degree, highest = -1, -1
-        for node in g.number_of_nodes():
+        for node in range(g.number_of_nodes()):
             if node in cover:
                 continue
             # Update the max number and node with the highest degree
