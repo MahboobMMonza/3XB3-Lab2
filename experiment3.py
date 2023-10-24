@@ -94,12 +94,62 @@ def run_experiment3b():
                 title="Accuracy of True MVC Sizes to Approximation Size",
                 description="Percentage of times the approximation matches MVC result",
                 x_label="Number of Edges",
-                y_label="Percentage of Matches")
+                y_label="Percentage of Matches (%)")
+
+
+def run_experiment3c():
+    node_ranges = range(5, 16, 1)
+    num_graphs = 1000
+
+    approx1_matches = []
+    approx2_matches = []
+    approx3_matches = []
+
+    for num_nodes in node_ranges:
+        matches_approx1 = 0
+        matches_approx2 = 0
+        matches_approx3 = 0
+        num_edges = 2 * num_nodes
+        print("nodes: " + str(num_nodes) +  " edges: " + str(num_edges))
+
+        for _ in range(num_graphs):
+            graph = create_random_graph(num_nodes, num_edges)
+
+            min_vc_size = len(MVC(graph))
+
+            approx1_vc_size = len(approx1(graph))
+            approx2_vc_size = len(approx2(graph))
+            approx3_vc_size = len(approx3(graph))
+
+            if min_vc_size == approx1_vc_size:
+                matches_approx1 += 1
+            if min_vc_size == approx2_vc_size:
+                matches_approx2 += 1
+            if min_vc_size == approx3_vc_size:
+                matches_approx3 += 1
+
+        total_graphs = num_graphs
+        approx1_percent = (matches_approx1 / total_graphs) * 100
+        approx2_percent = (matches_approx2 / total_graphs) * 100
+        approx3_percent = (matches_approx3 / total_graphs) * 100
+
+        approx1_matches.append(approx1_percent)
+        approx2_matches.append(approx2_percent)
+        approx3_matches.append(approx3_percent)
+
+    create_plot(list(node_ranges),
+                [approx1_matches, approx2_matches, approx3_matches],
+                legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
+                title="Accuracy of True MVC Sizes to Approximation Size",
+                description="Percentage of times the approximation matches MVC result given edges = 2 * nodes",
+                x_label="Number of Nodes",
+                y_label="Percentage of Matches (%)")
 
 
 def main():
     run_experiment3a()
     run_experiment3b()
+    run_experiment3c()
 
 
 if __name__ == '__main__':
