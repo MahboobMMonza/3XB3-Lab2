@@ -15,10 +15,10 @@ def run_experiment3a():
         approx2_total = 0
         approx3_total = 0
         min_vc_size_total = 0
+        x_vals.append(min(num_edges, (num_nodes ** 2 - num_nodes) // 2))
 
         for _ in range(num_graphs):
             graph = create_random_graph(num_nodes, num_edges)
-            x_vals.append(min(num_edges, (num_nodes ** 2 - num_nodes) // 2))
 
             min_vc_size = len(MVC(graph))
             min_vc_size_total += min_vc_size
@@ -44,9 +44,10 @@ def run_experiment3a():
                 [approx1_vals, approx2_vals, approx3_vals],
                 legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
                 title="Expected Performance of MVC Approximations",
-                description="Performance relative to true MVC size, repeated for 1000 graphs and nodes = 8",
+                description="Performance relative to true MVC size, repeated for 1000 graphs, nodes = 8, edges ranging from 1-28",
                 x_label="Number of Edges",
-                y_label="Expected Performance (%)")
+                y_label="Expected Performance (%)",
+                scale=1.5)
 
 
 def run_experiment3b():
@@ -90,11 +91,11 @@ def run_experiment3b():
         approx2_matches.append(approx2_percent)
         approx3_matches.append(approx3_percent)
 
-    create_plot(list(edge_ranges),
+    create_plot(x_vals,
                 [approx1_matches, approx2_matches, approx3_matches],
                 legend_labels=["Approximation 1", "Approximation 2", "Approximation 3"],
-                title="Accuracy of Approximations in Obtaining MVC Result ",
-                description="Repeated for 1000 graphs given nodes = 8 and edges ranging from 1-30",
+                title="Accuracy of Approximations in Obtaining MVC Result",
+                description="Repeated for 1000 graphs given nodes = 8 and edges ranging from 1-28",
                 x_label="Number of Edges",
                 y_label="Accuracy of Approximation(%)")
 
