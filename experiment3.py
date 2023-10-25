@@ -7,7 +7,7 @@ def run_experiment3a():
     edge_ranges = range(1, 31, 4)
     num_graphs = 1000
 
-    x_vals = list(edge_ranges)
+    x_vals = []
     approx1_vals, approx2_vals, approx3_vals = [], [], []
 
     for num_edges in edge_ranges:
@@ -18,6 +18,7 @@ def run_experiment3a():
 
         for _ in range(num_graphs):
             graph = create_random_graph(num_nodes, num_edges)
+            x_vals.append(min(num_edges, (num_nodes ** 2 - num_nodes) // 2))
 
             min_vc_size = len(MVC(graph))
             min_vc_size_total += min_vc_size
@@ -53,6 +54,7 @@ def run_experiment3b():
     num_nodes = 8
     edge_ranges = range(1, 31, 4)
     num_graphs = 1000
+    x_vals = []
 
     approx1_matches = []
     approx2_matches = []
@@ -62,6 +64,7 @@ def run_experiment3b():
         matches_approx1 = 0
         matches_approx2 = 0
         matches_approx3 = 0
+        x_vals.append(min(num_edges, (num_nodes ** 2 - num_nodes) // 2))
 
         for _ in range(num_graphs):
             graph = create_random_graph(num_nodes, num_edges)
@@ -110,7 +113,7 @@ def run_experiment3c():
         matches_approx2 = 0
         matches_approx3 = 0
         num_edges = 2 * num_nodes
-        print("nodes: " + str(num_nodes) +  " edges: " + str(num_edges))
+        print("nodes: " + str(num_nodes) + " edges: " + str(num_edges))
 
         for _ in range(num_graphs):
             graph = create_random_graph(num_nodes, num_edges)
