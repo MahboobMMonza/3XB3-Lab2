@@ -3,7 +3,7 @@ from graph import Graph
 
 def make_MIS_combo(g: Graph, comb: int) -> set[int]:
     mis = set()
-    for node in g.number_of_nodes():
+    for node in range(g.number_of_nodes()):
         if comb & (1 << node):
             mis.add(node)
 
@@ -11,9 +11,9 @@ def make_MIS_combo(g: Graph, comb: int) -> set[int]:
 
 
 def is_independent_set(g: Graph, ind_set: set[int]):
-    for start in g.number_of_nodes():
+    for start in range(g.number_of_nodes()):
         for end in g.adjacent_nodes(start):
-            if start in ind_set or end in ind_set:
+            if start in ind_set and end in ind_set:
                 return False
 
     return True
