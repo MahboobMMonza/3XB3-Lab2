@@ -35,6 +35,11 @@ def create_random_graph(num_nodes: int, num_edges: int) -> Graph:
     g = Graph(num_nodes)
     # Use a set to track all the edges added so far
     existing_edges = set()
+    potential_neighbours = {i: set() for i in range(g.number_of_nodes() - 1)}
+    for i in range(g.number_of_nodes() - 1):
+        for j in range(i + 1, g.number_of_nodes()):
+            potential_neighbours[i].add(j)
+
     while len(existing_edges) < num_edges:
         # In an undirected graph, an edge (u, v) can always be represented such that u < v. So we only need to
         # track that the randomly generated numbers are not equal (no self-loops), and then we can swap values
@@ -42,14 +47,12 @@ def create_random_graph(num_nodes: int, num_edges: int) -> Graph:
         # created, and act accordingly. The `are_connected` function could be used, but since adjacency is done
         # using a Python list, that is an O(n) operation. That could be fixed by using a set for adjacency
         # instead (granted the adding operation itself is O(n)).
-        u, v = random.randint(0, num_nodes - 1), random.randint(0, num_nodes - 1)
-        if u == v:
-            continue
-        elif u > v:
-            u, v = v, u
-        if (u, v) in existing_edges:
-            continue
+        u = random.choice(tuple(potential_neighbours.keys()))
+        v = random.choice(tuple(potential_neighbours[u]))
         g.add_edge(u, v)
         existing_edges.add((u, v))
+        potential_neighbours[u].discard(v)
+        if len(potential_neighbours[u]) == 0:
+            del potential_neighbours[u]
 
     return g
