@@ -19,8 +19,8 @@ def main() -> None:
     # test_is_connected(graph, True)
     # print('Testing if graph has cycle')
     # test_has_cycle(graph, True)
-    # print('Testing random graph creation')
-    # test_create_random_graph(10, 200, 5)
+    print('Testing random graph creation')
+    test_create_random_graph(10, 200, 5)
 
 
 def build_test_graph() -> Graph:

@@ -42,11 +42,9 @@ def create_random_graph(num_nodes: int, num_edges: int) -> Graph:
 
     while len(existing_edges) < num_edges:
         # In an undirected graph, an edge (u, v) can always be represented such that u < v. So we only need to
-        # track that the randomly generated numbers are not equal (no self-loops), and then we can swap values
-        # if the generated v is less than the generated u. Then we can check if this edge has already been
-        # created, and act accordingly. The `are_connected` function could be used, but since adjacency is done
-        # using a Python list, that is an O(n) operation. That could be fixed by using a set for adjacency
-        # instead (granted the adding operation itself is O(n)).
+        # track that the randomly generated numbers are not equal (no self-loops), which is done in the for-loop
+        # above by providing the allowed choices given the current u value. To ensure this edge is not duplicated,
+        # delete the selected node v from the list of potential neighbours of u.
         u = random.choice(tuple(potential_neighbours.keys()))
         v = random.choice(tuple(potential_neighbours[u]))
         g.add_edge(u, v)
